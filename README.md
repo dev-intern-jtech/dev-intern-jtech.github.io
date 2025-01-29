@@ -7,7 +7,7 @@ This framework designed specifically for creating dynamic, responsive websites a
 ### Key Features
 
 - **Dynamic URL Routing**: Manage URLs with both literal and regex patterns, allowing for complex navigation structures.
-- **CLI Support**: Not just for web, this framework can handle command-line interface operations for script-based tasks.
+- **CLI Support**: This framework handles command-line interface operations for script-based tasks.
 - **Component-Based Architecture**: Utilize reusable components to build pages, ensuring consistency across applications.
 - **Security**: Built-in methods for data sanitation and security practices to protect against common web vulnerabilities.
 - **Event-Driven Programming**: Extend functionality through an event system, making the framework highly customizable.
@@ -43,15 +43,4 @@ This framework is ideal for:
 - Building internal tools that require both web and CLI interfaces.
 - Projects needing extensive customization in routing and content management.
 
-### Getting Started
 
-- **Learn the Components**: Familiarize yourself with `jt_request_controller` and `jt`.
-- **Experiment with Routing**: Try defining new routes using both literal and regex methods.
-- **Security**: Understand how to use the built-in security features to sanitize inputs.
-
-### Future Learning
-
-As you grow with this framework, dive deeper into:
-- The event and filter systems for extending functionality.
-- Custom component development to tailor the framework to new project requirements.
-- Performance optimization through content preloading and caching mechanisms.
