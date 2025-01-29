@@ -1,111 +1,120 @@
-# JT Framework Documentation
+# JT Framework Internal Documentation
 
-## 1. Getting Started
-- Installation Guide
-- Basic Configuration
+## 1. Framework Overview
 - Directory Structure
-- Quick Start Example
+- Key Components
+- Configuration Settings
 
-## 2. Core Concepts
-### Request Handling
-- Request Types
-  - Literal Requests
-  - Regex Requests
-  - CLI Requests
-- Request Flow
+## 2. Core Components
+
+### Request System
+- Understanding Request Types
+  - Literal Requests (`registerLiteralRequests`)
+  - Regex Requests (`registerRegexRequests`)
+  - CLI Requests (`registerCLIRequests`)
 - URL Key System
+  - How URL Keys Work
+  - Adding Custom URL Handlers
+  - Database Integration
 
 ### Controllers
-- Base Controller
-- Request Controller
-- Specialized Controllers
+- Available Controllers Overview
+  - Request Controller
   - Agent Controller
   - Data Controller
   - View Controller
   - Security Controller
   - etc.
+- How to Create New Controllers
+- Best Practices
 
-### Models
-- Model System Overview
-- Available Models
-  - Email Model
-  - Error Model
-  - Request Model
-  - Response Model
-
-### Views
+### Models & Views
+- Model System
 - View System
-- Forms Handling
+- Forms Processing
 - Page Rendering
-- Available View Helpers
 
-## 3. Advanced Topics
-### Routing System
-- URL Management
-- Request Processing
-- Custom Routes
-- URL Keys and Handlers
+## 3. Common Use Cases
 
-### Security
-- Input Scrubbing
-- Request Validation
-- Security Best Practices
-
-### Ajax Handling
-- Ajax Requests
-- State Management
-- Request Types
-- Response Handling
-
-## 4. API Reference
-### Controllers
+### Basic Routing
 ```php
-// Example Controller Documentation
-class jt_request_controller {
-    /**
-     * Registers literal URL requests
-     * @param array $requests Array of request configurations
-     */
-    public static function registerLiteralRequests($requests)
-
-    /**
-     * Registers regex-based URL patterns
-     * @param array $requests Array of regex patterns and handlers
-     */
-    public static function registerRegexRequests($requests)
-    // ... other methods
-}
-```
-
-## 5. Examples and Tutorials
-### Basic Usage
-```php
-// Example: Setting up a basic page route
+// Setting up a simple page route
 jt_request_controller::registerLiteralRequests([
-    'home' => [
-        'name' => 'home',
-        'handler' => 'HomeController::index',
+    'dashboard' => [
+        'name' => 'dashboard',
+        'handler' => 'DashboardController::index',
         'type' => 'page'
     ]
 ]);
 ```
 
-### Advanced Usage
+### URL Key Handling
 ```php
-// Example: Custom URL key handler
+// Custom URL handler for product pages
 jt_request_controller::registerUrlKeyHandler('products', function($urlKeyData, $uriPart) {
-    // Handler logic
+    // Product page logic
+    return new jt_request([
+        'name' => 'product_page',
+        'handler' => 'ProductController::show',
+        'type' => 'page'
+    ]);
 });
 ```
 
-## 6. Best Practices and Guidelines
-- Code Organization
-- Naming Conventions
-- Error Handling
-- Performance Optimization
+### AJAX Request Handling
+```php
+// Example of handling AJAX requests
+jt_request_controller::registerLiteralRequests([
+    'api-endpoint' => [
+        'name' => 'api_call',
+        'handler' => 'ApiController::handle',
+        'type' => 'raw'
+    ]
+]);
+```
 
-## 7. Troubleshooting
+## 4. Database Integration
+- URL Keys Table Structure
+- Query Handling
+- Best Practices for DB Operations
+
+## 5. Security Features
+- Input Scrubbing System
+- Request Validation
+- Security Best Practices
+
+## 6. Troubleshooting Guide
 - Common Issues
-- Debug Tools
+- Debug Techniques
 - Error Messages
-- FAQs
+- Known Limitations
+
+## 7. Code Examples Library
+- Complete Working Examples
+- Common Patterns
+- Reusable Code Snippets
+
+## 8. Internal API Reference
+Detailed method documentation for each core class:
+
+### jt_request_controller
+```php
+/**
+ * Core request handling class
+ */
+class jt_request_controller {
+    /**
+     * Registers direct URL matches
+     * @param array $requests Array of request configurations
+     */
+    public static function registerLiteralRequests($requests)
+
+    /**
+     * Registers pattern-based URL matches
+     * @param array $requests Array of regex patterns and handlers
+     */
+    public static function registerRegexRequests($requests)
+    
+    // ... other methods
+}
+```
