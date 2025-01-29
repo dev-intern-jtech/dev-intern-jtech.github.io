@@ -500,16 +500,22 @@ This framework designed specifically for creating dynamic, responsive websites a
   - `$_version`: Framework version.
 
 ##### [tmp_start.php](#tmp_startphp)
-- **Purpose**: Temporary or initial setup script, might be used for bootstrapping or testing environments.
-- **Relationships**: Could be an entry point or setup file for development or specific scenarios, might interact with various controllers or models during setup.
+- **Purpose**: Temporary or initial setup script, might be used for bootstrapping or testing environments. This file initializes debugging and performance profiling when necessary, and starts timing the execution of the script or application.
+- **Relationships**: Could be an entry point or setup file for development or specific scenarios, might interact with various controllers or models during setup. It's particularly related to performance analysis tools like XHProf and could influence how other parts of the framework operate under debug or test conditions.
 
   **Functions**:
   - `setupEnvironment()`
-    - **Purpose**: Sets up the environment for development or testing.
+    - **Purpose**: Sets up the environment for development or testing. This could include configuring debug settings, enabling profiling tools, or setting up initial conditions for testing.
     - **Parameters**: None
     - **Returns**: None
 
   **Fields**:
-  - `$testMode`: Boolean indicating if in test mode.
+  - `$testMode`: Boolean indicating if in test mode. Used to determine whether to enable debugging features or profiling.
+  - `$doDebug`: Boolean to toggle debugging on or off. When `true`, it activates profiling and other debug functionalities.
+  - `$MEOWt1`: Float, stores the start time of the script execution in microseconds, used for performance measurement.
+
+  **Additional Notes**:
+  - **Debugging**: The file uses XHProf for profiling when `$doDebug` is set to `true`. XHProf is enabled with flags to track both CPU time and memory usage, allowing for comprehensive performance analysis.
+  - **Performance Timing**: `$MEOWt1` is set with `microtime(true)` to mark the beginning of execution time measurement, which could be used later to calculate the total execution time of the script or application.
 
 This structure provides a comprehensive overview, detailing not just the file's purpose and relationships but also diving into its main functions and fields, offering a deeper insight into the framework's architecture and functionality.
