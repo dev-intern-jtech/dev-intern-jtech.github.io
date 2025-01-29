@@ -650,11 +650,57 @@ This framework designed specifically for creating dynamic, responsive websites a
       - `$options` - Options for how to handle the event's output.
     - **Returns**: Array - Output from event functions.
 
-  - `appendRequestToResponseGroup($requestName, &$responseGroup, $reqPost = [], $extra = null)`
-    - **Purpose**: Appends a request's response to an existing response group.
+   - `appendResponseGroup($responseGroup, $outputs, $options = [])`
+    - **Purpose**: Appends a single response group to outputs with type conversion options.
     - **Parameters**: 
-      - `$requestName` - Name of the request or the request object.
-      - `&$responseGroup` - Reference to the response group to append to.
+      - `$responseGroup`: The response group to append.
+      - `$outputs`: The outputs to which the response group will be appended.
+      - `$options`: An array of options for how the response should be appended, like type conversion settings.
+    - **Returns**: None
+    - **Details**: This function processes each response within the provided `$responseGroup`, converting JavaScript or JSON-LD responses to HTML if specified in the `$options`. It then appends these responses to the corresponding type in `$outputs`, managing meta, HTML, and JavaScript content appropriately. If response options are provided, they are merged into the outputs.
+
+  - `updateRequestFromResponseGroup(&$request, $responseGroup)`
+    - **Purpose**: Updates a request based on responses within a response group.
+    - **Parameters**: 
+      - `&$request`: Reference to the request object that needs updating.
+      - `$responseGroup`: The response group from which updates are sourced.
+    - **Returns**: None
+    - **Details**: Iterates through the `$responseGroup` to find a response of type 'request'. If found, it updates the `$request` reference with the content of that response. This can be used to dynamically alter the request based on previous response data.
+
+  - `createResponseGroup(&$data)`
+    - **Purpose**: Creates a response group from data, including various response types.
+    - **Parameters**: 
+      - `&$data`: Reference to an array containing structured data for building the response group.
+    - **Returns**: Array, constructed response group
+    - **Details**: This function constructs a response group by interpreting different keys in the `$data` array. It handles pre-JS, HTML, JS, meta data (including title, keywords, description, etc.), raw content, request updates, and error responses. Each type of response is encapsulated into a `jt_response` object and added to the response group array.
+
+  - `get404ResponseGroup()`
+    - **Purpose**: Retrieves the response group for a 404 error.
+    - **Parameters**: None
+    - **Returns**: Response group for 404
+    - **Details**: This method calls the view controller to get the response group associated with a 404 error request, which would have been pre-registered in the request controller. It's used to handle 404 errors by providing a structured response group.
+
+  - `setContentAlt($key, $content)`
+    - **Purpose**: Sets alternative content in the database with a key.
+    - **Parameters**: 
+      - `$key`: The key under which the content will be stored.
+      - `$content`: The content to store, which might be JSON encoded if it's not a string.
+    - **Returns**: Result of database operation
+    - **Details**: Uses the database controller to insert or update a row in the `jt_content_alt` table. If the content isn't a string, it's JSON encoded before storage. This function is useful for storing alternative versions or variations of content.
+
+  - `getContentAlt($key, $force = false)`
+    - **Purpose**: Retrieves alternative content from the database or cache.
+    - **Parameters**: 
+      - `$key`: The key used to retrieve the content.
+      - `$force`: If true, forces a database query instead of using cached content.
+    - **Returns**: Retrieved content or false
+    - **Details**: Checks the cache first unless `$force` is true. If not in cache or forced, it queries the database. If the content is encrypted, it decrypts it before returning. The result is cached for future use.
+
+  - `getContent($key, $force = false)`
+    - **Purpose**: Retrieves content from the database or cache.
+    - **Parameters**: Same as `getContentAlt`
+    - **Returns**: Retrieved content or false
+    - **Details**: Similar to `getContentAlt`, but retrieves content from the `jt_content` table. It uses caching to improve performance unless `$
       
 
 ##### [tmp_start.php](#tmp_startphp)
