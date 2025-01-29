@@ -503,14 +503,7 @@ This framework designed specifically for creating dynamic, responsive websites a
 - **Purpose**: Temporary or initial setup script, might be used for bootstrapping or testing environments. This file initializes debugging and performance profiling when necessary, and starts timing the execution of the script or application.
 - **Relationships**: Could be an entry point or setup file for development or specific scenarios, might interact with various controllers or models during setup. It's particularly related to performance analysis tools like XHProf and could influence how other parts of the framework operate under debug or test conditions.
 
-  **Functions**:
-  - `setupEnvironment()`
-    - **Purpose**: Sets up the environment for development or testing. This could include configuring debug settings, enabling profiling tools, or setting up initial conditions for testing.
-    - **Parameters**: None
-    - **Returns**: None
-
   **Fields**:
-  - `$testMode`: Boolean indicating if in test mode. Used to determine whether to enable debugging features or profiling.
   - `$doDebug`: Boolean to toggle debugging on or off. When `true`, it activates profiling and other debug functionalities.
   - `$MEOWt1`: Float, stores the start time of the script execution in microseconds, used for performance measurement.
 
