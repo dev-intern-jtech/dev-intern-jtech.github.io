@@ -61,7 +61,7 @@ This framework designed specifically for creating dynamic, responsive websites a
       - [webapp.php](#webappphp)
     - [jt_load.php](#jt_loadphp)
     - [jt_post.php](#jt_postphp)
-    - [jt.php](#jtphp)
+    - [jt.php](/php/jt.md)
     - [tmp_start.php](#tmp_startphp)
 
 ### PHP Files
