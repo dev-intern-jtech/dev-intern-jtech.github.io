@@ -1,120 +1,57 @@
 # JT Framework Internal Documentation
 
-## 1. Framework Overview
-- Directory Structure
-- Key Components
-- Configuration Settings
+## Introduction
 
-## 2. Core Components
+This framework designed specifically for creating dynamic, responsive websites and web applications.
 
-### Request System
-- Understanding Request Types
-  - Literal Requests (`registerLiteralRequests`)
-  - Regex Requests (`registerRegexRequests`)
-  - CLI Requests (`registerCLIRequests`)
-- URL Key System
-  - How URL Keys Work
-  - Adding Custom URL Handlers
-  - Database Integration
+### Key Features
 
-### Controllers
-- Available Controllers Overview
-  - Request Controller
-  - Agent Controller
-  - Data Controller
-  - View Controller
-  - Security Controller
-  - etc.
-- How to Create New Controllers
-- Best Practices
+- **Dynamic URL Routing**: Manage URLs with both literal and regex patterns, allowing for complex navigation structures.
+- **CLI Support**: Not just for web, this framework can handle command-line interface operations for script-based tasks.
+- **Component-Based Architecture**: Utilize reusable components to build pages, ensuring consistency across applications.
+- **Security**: Built-in methods for data sanitation and security practices to protect against common web vulnerabilities.
+- **Event-Driven Programming**: Extend functionality through an event system, making the framework highly customizable.
+- **Content Management**: Efficient preloading and management of content for better performance on dynamic sites.
 
-### Models & Views
-- Model System
-- View System
-- Forms Processing
-- Page Rendering
+### Core Components
 
-## 3. Common Use Cases
+- **`jt_request_controller`**: 
+  - Handles all incoming requests, routing them accordingly based on URL patterns or CLI commands.
+  - Manages the lifecycle of a request from initiation to response.
 
-### Basic Routing
-```php
-// Setting up a simple page route
-jt_request_controller::registerLiteralRequests([
-    'dashboard' => [
-        'name' => 'dashboard',
-        'handler' => 'DashboardController::index',
-        'type' => 'page'
-    ]
-]);
-```
+- **`jt`**:
+  - A central utility class that initializes various controllers, manages configurations, handles URL generation, and more.
 
-### URL Key Handling
-```php
-// Custom URL handler for product pages
-jt_request_controller::registerUrlKeyHandler('products', function($urlKeyData, $uriPart) {
-    // Product page logic
-    return new jt_request([
-        'name' => 'product_page',
-        'handler' => 'ProductController::show',
-        'type' => 'page'
-    ]);
-});
-```
+### How It Works
 
-### AJAX Request Handling
-```php
-// Example of handling AJAX requests
-jt_request_controller::registerLiteralRequests([
-    'api-endpoint' => [
-        'name' => 'api_call',
-        'handler' => 'ApiController::handle',
-        'type' => 'raw'
-    ]
-]);
-```
+- **Initialization**: 
+  - The framework is initialized via `jt::init()`, setting up configurations, security measures, and database connections.
 
-## 4. Database Integration
-- URL Keys Table Structure
-- Query Handling
-- Best Practices for DB Operations
+- **Request Processing**:
+  - The `jt_request_controller` parses the URI, matches it against registered routes, and decides which handlers should process the request.
 
-## 5. Security Features
-- Input Scrubbing System
-- Request Validation
-- Security Best Practices
+- **URL Handling**:
+  - URLs are dynamically generated and managed, allowing for easy navigation and SEO-friendly structures.
 
-## 6. Troubleshooting Guide
-- Common Issues
-- Debug Techniques
-- Error Messages
-- Known Limitations
+- **Content Preloading**:
+  - Before rendering, content that's likely to be needed can be preloaded, reducing latency on user interactions.
 
-## 7. Code Examples Library
-- Complete Working Examples
-- Common Patterns
-- Reusable Code Snippets
+### Use Cases
 
-## 8. Internal API Reference
-Detailed method documentation for each core class:
+This framework is ideal for:
+- Creating custom web applications with unique business logic.
+- Building internal tools that require both web and CLI interfaces.
+- Projects needing extensive customization in routing and content management.
 
-### jt_request_controller
-```php
-/**
- * Core request handling class
- */
-class jt_request_controller {
-    /**
-     * Registers direct URL matches
-     * @param array $requests Array of request configurations
-     */
-    public static function registerLiteralRequests($requests)
+### Getting Started
 
-    /**
-     * Registers pattern-based URL matches
-     * @param array $requests Array of regex patterns and handlers
-     */
-    public static function registerRegexRequests($requests)
-    
-    // ... other methods
-}
-```
+- **Learn the Components**: Familiarize yourself with `jt_request_controller` and `jt`.
+- **Experiment with Routing**: Try defining new routes using both literal and regex methods.
+- **Security**: Understand how to use the built-in security features to sanitize inputs.
+
+### Future Learning
+
+As you grow with this framework, dive deeper into:
+- The event and filter systems for extending functionality.
+- Custom component development to tailor the framework to new project requirements.
+- Performance optimization through content preloading and caching mechanisms.
