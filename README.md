@@ -22,7 +22,7 @@ This framework designed specifically for creating dynamic, responsive websites a
   - deploy
   - js
   - node
-  - [php](#PHP_Files)
+  - php
     - [controllers](#controllers)
       - [agent_controller.php](#agent_controllerphp)
       - [data_controller.php](#data_controllerphp)
@@ -64,7 +64,7 @@ This framework designed specifically for creating dynamic, responsive websites a
     - [jt.php](#jtphp)
     - [tmp_start.php](#tmp_startphp)
 
-### [PHP Files](#PHP_Files)
+### PHP Files
 
 #### [controllers](#controllers)
 
