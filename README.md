@@ -15,53 +15,55 @@ This framework designed specifically for creating dynamic, responsive websites a
 
 
 ## Directory Structure
-/framework
-    /config
-    /css
-    /deploy
-    /js
-    /node
-    /php
-        /controllers
-            - agent_controller.php
-            - data_controller.php
-            - date_controller.php
-            - db_controller.php
-            - email_controller.php
-            - error_controller.php
-            - image_controller.php
-            - node_controller.php
-            - request_controller.php
-            - scrub_controller.php
-            - security_controller.php
-            - server_controller.php
-            - session_controller.php
-            - text_controller.php
-            - util_controller.php
-            - validate_controller.php
-            - view_controller.php
-        /models
-            - email.php
-            - error.php
-            - model.php
-            - request.php
-            - response.php
-        /views
-            /forms
-                - 404.php
-                - browser_hash.php
-                - field.php
-                - form.php
-                - h2push.php
-                - page.php
-                - redirect.php
-                - robots.php
-                - sitemap.php
-                - webapp.php
-            - jt_load.php
-            - jt_post.php
-            - jt.php
-            - tmp_start.php
+# Directory Structure
+
+- framework
+  - config
+  - css
+  - deploy
+  - js
+  - node
+  - php
+    - controllers
+      - agent_controller.php
+      - data_controller.php
+      - date_controller.php
+      - db_controller.php
+      - email_controller.php
+      - error_controller.php
+      - image_controller.php
+      - node_controller.php
+      - request_controller.php
+      - scrub_controller.php
+      - security_controller.php
+      - server_controller.php
+      - session_controller.php
+      - text_controller.php
+      - util_controller.php
+      - validate_controller.php
+      - view_controller.php
+    - models
+      - email.php
+      - error.php
+      - model.php
+      - request.php
+      - response.php
+    - views
+      - forms (Folder, not covered here... yet)
+      - 404.php
+      - browser_hash.php
+      - field.php
+      - form.php
+      - h2push.php
+      - page.php
+      - redirect.php
+      - robots.php
+      - sitemap.php
+      - webapp.php
+    - jt_load.php
+    - jt_post.php
+    - jt.php
+    - tmp_start.php
 # Framework Documentation
 
 This document provides an overview of each PHP file within the `framework` directory, detailing its purpose and its relationships with other files.
