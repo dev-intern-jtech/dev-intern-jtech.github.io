@@ -475,7 +475,7 @@ This framework designed specifically for creating dynamic, responsive websites a
 
 ##### [jt_post.php](#jt_postphp)
 - **Purpose**: Manages POST request handling or related operations within the framework context.
-- **Relationships**: Interacts with `request_controller.php` for processing POST data.
+- **Relationships**: Which files this calls methods/functions or grabs data from
 
   **Functions**:
   - `handlePostData($data)`
@@ -487,21 +487,178 @@ This framework designed specifically for creating dynamic, responsive websites a
   - `$postData`: Stores POST request data.
 
 ##### [jt.php](#jtphp)
-- **Purpose**: Likely the main entry point for framework initialization or core operations, managing the overall flow.
-- **Relationships**: Central file, connects to all other parts of the framework, especially `view_controller.php`.
+- **Purpose**: The main entry point for framework initialization or core operations, managing the overall flow. This file defines the core functionality of the framework, including initialization, configuration, and utility methods.
+- **Relationships**: 
+  - Calls methods from:
+    - [jt_util_controller.php](#jt_util_controllerphp) for utility functions.
+    - [jt_db_controller.php](#jt_db_controllerphp) for database operations.
+    - [jt_text_controller.php](#jt_text_controllerphp) for text processing.
+    - [jt_server_controller.php](#jt_server_controllerphp) for server-related operations.
+    - [jt_email_controller.php](#jt_email_controllerphp) for email functionalities.
+    - [jt_error_controller.php](#jt_error_controllerphp) for error handling.
+    - [jt_session_controller.php](#jt_session_controllerphp) for session management.
+    - [jt_data_controller.php](#jt_data_controllerphp) for data operations.
+    - [jt_validate_controller.php](#jt_validate_controllerphp) for data validation.
+    - [jt_scrub_controller.php](#jt_scrub_controllerphp) for data sanitization.
+    - [jt_date_controller.php](#jt_date_controllerphp) for date-related operations.
+    - [jt_request_controller.php](#jt_request_controllerphp) for request handling.
+    - [jt_security_controller.php](#jt_security_controllerphp) for security features.
+    - [jt_image_controller.php](#jt_image_controllerphp) for image processing.
+    - [jt_agent_controller.php](#jt_agent_controllerphp) for user agent information.
+    - [jt_view_controller.php](#jt_view_controllerphp) for view rendering.
+    - [jt_node_controller.php](#jt_node_controllerphp) for Node.js integration.
 
   **Functions**:
   - `init()`
-    - **Purpose**: Initializes the framework.
+    - **Purpose**: Initializes the framework by setting up the environment, configuring various controllers, and initializing the request cycle.
+    - **Parameters**: None
+    - **Returns**: None
+    - **Details**: This method sets up timestamp information, determines the environment (CLI or web), configures debugging and flags, sets up the database connection, initializes various controllers, sets up UTF-8 encoding, and triggers framework events. It also handles CLI-specific configurations and sets HTTP headers when not in CLI mode.
+
+  - `setConfig($env, $key, $value, $merge = false)`
+    - **Purpose**: Sets configuration values for different environments.
+    - **Parameters**: 
+      - `$env` - Environment to set the config for (can be an array).
+      - `$key` - Configuration key.
+      - `$value` - Value to set.
+      - `$merge` - Whether to merge the value with existing configuration.
+    - **Returns**: None
+    - **Details**: Allows setting or merging configuration values for specified environments.
+
+  - `getSiteUrl($input, $toReq = null, $replaceToReq = false)`
+    - **Purpose**: Generates the full site URL.
+    - **Parameters**: 
+      - `$input` - The URL part to append.
+      - `$toReq` - Optional request to replace or append to.
+      - `$replaceToReq` - Whether to replace or append the request.
+    - **Returns**: String - The constructed site URL.
+
+  - `getUrl($input, $toReq = null, $replaceToReq = false)`
+    - **Purpose**: Generates a URL within the site based on the input.
+    - **Parameters**: 
+      - `$input` - The URL part to generate.
+      - `$toReq` - Optional request to replace or append to.
+      - `$replaceToReq` - Whether to replace or append the request.
+    - **Returns**: String - The constructed URL within the site.
+
+  - `setUrl($input, $toReq = null, $replaceToReq = false)`
+    - **Purpose**: Sets the URI for the current request.
+    - **Parameters**: 
+      - `$input` - The URL part to set.
+      - `$toReq` - Optional request to replace or append to.
+      - `$replaceToReq` - Whether to replace or append the request.
+    - **Returns**: None
+
+  - `getUrlEncoded($input, $toReq = null, $replaceToReq = false)`
+    - **Purpose**: Encodes a generated URL.
+    - **Parameters**: 
+      - `$input` - The URL part to encode.
+      - `$toReq` - Optional request to replace or append to.
+      - `$replaceToReq` - Whether to replace or append the request.
+    - **Returns**: String - The encoded URL.
+
+  - `setEcho($value)`
+    - **Purpose**: Sets whether the framework should echo output.
+    - **Parameters**: `$value` - Boolean to set echo state.
+    - **Returns**: None
+
+  - `process()`
+    - **Purpose**: Processes view responses.
     - **Parameters**: None
     - **Returns**: None
 
-  **Fields**:
-  - `$_version`: Framework version.
+  - `wrapup()`
+    - **Purpose**: Performs wrap-up operations for the framework, triggering events at the end of the request cycle.
+    - **Parameters**: None
+    - **Returns**: None
+
+  - `form($fields, $options, &$data = null, &$aData = null)`
+    - **Purpose**: Creates a form view object.
+    - **Parameters**: 
+      - `$fields` - Array of form fields.
+      - `$options` - Form options.
+      - `&$data` - Reference to data for the form.
+      - `&$aData` - Reference to additional data.
+    - **Returns**: Object - A form view object.
+
+  - `debug($input = null, $email = false, $subject = false)`
+    - **Purpose**: Outputs debug information, optionally via email.
+    - **Parameters**: 
+      - `$input` - Data to debug.
+      - `$email` - Email address to send debug info to or boolean to toggle.
+      - `$subject` - Email subject if sending via email.
+    - **Returns**: None
+
+  - `jsonEncode($input, $options = [])`
+    - **Purpose**: Encodes data to JSON format.
+    - **Parameters**: 
+      - `$input` - Data to encode.
+      - `$options` - Encoding options.
+    - **Returns**: String - JSON encoded string.
+
+  - `jsonDecode($input, $options = [])`
+    - **Purpose**: Decodes JSON data.
+    - **Parameters**: 
+      - `$input` - JSON string to decode.
+      - `$options` - Decoding options.
+    - **Returns**: Array - Decoded JSON data.
+
+  - `empty($input)`
+    - **Purpose**: Checks if the input is considered empty by the framework's standards.
+    - **Parameters**: `$input` - Data to check.
+    - **Returns**: Boolean - Whether the input is considered empty.
+
+  - `hasFilter($filterName)`
+    - **Purpose**: Checks if a filter exists.
+    - **Parameters**: `$filterName` - Name of the filter to check.
+    - **Returns**: Boolean - True if the filter exists, false otherwise.
+
+  - `hasEvent($eventName)`
+    - **Purpose**: Checks if an event exists.
+    - **Parameters**: `$eventName` - Name of the event to check.
+    - **Returns**: Boolean - True if the event exists, false otherwise.
+
+  - `regFilter($filterName, $func, $options = [])`
+    - **Purpose**: Registers a new filter.
+    - **Parameters**: 
+      - `$filterName` - Name of the filter.
+      - `$func` - Function to be called by the filter.
+      - `$options` - Options for the filter registration.
+    - **Returns**: None
+
+  - `applyFilter($filterName, $value, $extra = null)`
+    - **Purpose**: Applies a filter to a value.
+    - **Parameters**: 
+      - `$filterName` - Name of the filter to apply.
+      - `$value` - Value to filter.
+      - `$extra` - Additional data for the filter function.
+    - **Returns**: Mixed - The filtered value.
+
+  - `regEvent($eventName, $func, $options = [])`
+    - **Purpose**: Registers a new event.
+    - **Parameters**: 
+      - `$eventName` - Name of the event.
+      - `$func` - Function to be triggered by the event.
+      - `$options` - Options for the event registration.
+    - **Returns**: None
+
+  - `triggerEvent($eventName, $extra = null, $options = [])`
+    - **Purpose**: Triggers an event, calling all registered functions for that event.
+    - **Parameters**: 
+      - `$eventName` - Name of the event to trigger.
+      - `$extra` - Additional data for the event functions.
+      - `$options` - Options for how to handle the event's output.
+    - **Returns**: Array - Output from event functions.
+
+  - `appendRequestToResponseGroup($requestName, &$responseGroup, $reqPost = [], $extra = null)`
+    - **Purpose**: Appends a request's response to an existing response group.
+    - **Parameters**: 
+      - `$requestName` - Name of the request or the request object.
+      - `&$responseGroup` - Reference to the response group to append to.
+      
 
 ##### [tmp_start.php](#tmp_startphp)
 - **Purpose**: Temporary or initial setup script, might be used for bootstrapping or testing environments. This file initializes debugging and performance profiling when necessary, and starts timing the execution of the script or application.
-- **Relationships**: Could be an entry point or setup file for development or specific scenarios, might interact with various controllers or models during setup. It's particularly related to performance analysis tools like XHProf and could influence how other parts of the framework operate under debug or test conditions.
 
   **Fields**:
   - `$doDebug`: Boolean to toggle debugging on or off. When `true`, it activates profiling and other debug functionalities.
